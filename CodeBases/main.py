@@ -1,17 +1,11 @@
-# Contact Management System
-# College Project - Python 3 (B.Tech CSE - 1st Semester)
-
-# List of dictionaries to store all contacts
 contacts = []
 
 
-def is_valid_phone(phone):
-    # Phone number must be exactly 10 digits
+def is_valid_phone(phone):
     return len(phone) == 10 and phone.isdigit()
 
 
 def phone_exists(phone):
-    # Check if phone number already exists in contacts
     for contact in contacts:
         if contact["phone"] == phone:
             return True
@@ -22,19 +16,16 @@ def add_contact():
     name = input("Enter Name: ").strip()
     phone = input("Enter Phone: ").strip()
 
-    # Validation 1: check length and if digits
     if not is_valid_phone(phone):
         print("Invalid phone number. Enter exactly 10 digits.")
         return
-
-    # Validation 2: check duplicate
+
     if phone_exists(phone):
         print("Contact with this number already exists.")
         return
 
     email = input("Enter Email (press enter to skip): ").strip()
-
-    # Create dictionary and append to list
+
     new_contact = {
         "name": name,
         "phone": phone,
@@ -45,8 +36,7 @@ def add_contact():
     print(f"Contact added: {name} | {phone}")
 
 
-def display_contacts():
-    # Read/Display all contacts
+def display_contacts():
     if not contacts:
         print("No contacts to display.")
         return
@@ -63,8 +53,7 @@ def search_contact():
     search_name = input("Enter name to search: ").strip()
     found = False
 
-    for contact in contacts:
-        # Case insensitive search
+    for contact in contacts:
         if search_name.lower() in contact["name"].lower():
             if contact["email"]:
                 print(f"{contact['name']} | {contact['phone']} | {contact['email']}")
@@ -94,8 +83,7 @@ def update_contact():
     if not is_valid_phone(new_phone):
         print("Invalid phone number. Enter exactly 10 digits.")
         return
-
-    # If new phone is already used by someone else
+
     if new_phone != target_contact["phone"] and phone_exists(new_phone):
         print("Contact with this number already exists.")
         return
